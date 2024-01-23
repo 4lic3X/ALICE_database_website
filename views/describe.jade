@@ -1,0 +1,47 @@
+extends layout 
+
+block content 
+  body
+    h3 Object #{id} / 30      
+    
+    img(src='images/objects/#{objectId}.PNG' alt='Image' style='width: 200px; height: 200px;')
+    img(src='images/objects/#{objectId}.gif' alt='Annimation' style='width: 200px; height: 200px; margin-left: 75px;')
+    br
+    br
+
+    form(action="/log/describe/#{id}", method="post", onsubmit="validateInput(event);" autocomplete="off")
+      p 1. Have you seen this category of object in your life before? 
+      <div style="background-color:yellow;"> Please decide based solely on the SHAPE of the object, IGNORING COLORS. </div>
+      
+      br
+      label.radio.with-gap
+        input.with-gap(type='radio' name='seen' value='yes') 
+        span.black-text.radio-label Yes
+      
+      label.radio.with-gap
+        input.with-gap(type='radio' name='seen' value='no')
+        span.black-text.radio-label No
+      
+      br
+      br
+      p 2. If yes, what is it? If no, please provide a description of this object in a couple of short sentences. 
+      <div style="background-color:yellow;"> Please name or describe based solely on the SHAPE of the object, IGNORING COLORS.</div>
+      //- input#description(type='text' name='description' placeholder="Type your answer here.")
+
+      br
+      .input-field
+        input#description.validate(
+          type='text',
+          name="description"
+        )
+        label(for='name') Description
+      
+      input(type="hidden" name="id" value='#{id}')
+      
+      br
+      br
+      button.waves-effect.waves-light.btn Next
+    
+    script. 
+        const id = #{id};
+    script(src='javascripts/describe.js')
